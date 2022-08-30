@@ -3,16 +3,16 @@ package com.apptreesoftware.barcodescan
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
-class BarcodeScanPlugin(val activity: Activity): MethodCallHandler,
-    PluginRegistry.ActivityResultListener {
-  var result : Result? = null
+class BarcodeScanPlugin(val activity: Activity?) :
+    MethodCallHandler, PluginRegistry.ActivityResultListener {
+  var result: Result? = null
   companion object {
     @JvmStatic
     fun registerWith(registrar: Registrar): Unit {
@@ -39,7 +39,7 @@ class BarcodeScanPlugin(val activity: Activity): MethodCallHandler,
     val intent = Intent(activity, BarcodeScannerActivity::class.java)
     val args = Bundle()
     args.putString("theme", theme)
-    intent.putExtras(args);
+    intent.putExtras(args)
     activity.startActivityForResult(intent, 100)
   }
 
@@ -49,7 +49,7 @@ class BarcodeScanPlugin(val activity: Activity): MethodCallHandler,
         val barcode = data?.getStringExtra("SCAN_RESULT")
         barcode?.let { this.result?.success(barcode) }
       } else {
-        val errorCode = data?.getStringExtra("ERROR_CODE")
+        val errorCode = data?.getStringExtra("ERROR_CODE") ?: "100"
         this.result?.error(errorCode, null, null)
       }
       return true
