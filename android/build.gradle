@@ -62,6 +62,7 @@ protobuf {
             } else {
                 artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
             }
+        }
     }
     generateProtoTasks {
         all().each { task ->
