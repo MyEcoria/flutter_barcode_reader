@@ -40,7 +40,7 @@ class BarcodeScanPlugin(val activity: Activity?) :
     val args = Bundle()
     args.putString("theme", theme)
     intent.putExtras(args)
-    activity.startActivityForResult(intent, 100)
+    activity?.startActivityForResult(intent, 100)
   }
 
   override fun onActivityResult(code: Int, resultCode: Int, data: Intent?): Boolean {
