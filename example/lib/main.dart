@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String barcode = "";
+  String? barcode = "";
 
   @override
   initState() {
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
                       onPressed: scan, child: new Text("Scan")),
                   padding: const EdgeInsets.all(8.0),
                 ),
-                new Text(barcode),
+                new Text(barcode!),
               ],
             ),
           )),
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
 
   Future scan() async {
     try {
-      String barcode = await BarcodeScanner.scan(OverlayTheme.KALIUM);
+      String? barcode = await BarcodeScanner.scan(OverlayTheme.KALIUM);
       setState(() => this.barcode = barcode);
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {

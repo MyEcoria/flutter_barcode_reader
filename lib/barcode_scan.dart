@@ -24,9 +24,9 @@ class BarcodeScanner {
   static const CameraAccessDenied = 'PERMISSION_NOT_GRANTED';
   static const MethodChannel _channel =
       const MethodChannel('com.apptreesoftware.barcode_scan');
-  static Future<String> scan(OverlayTheme theme) async {
+  static Future<String?> scan(OverlayTheme theme) async {
     assert(theme != null);
-    String themeStr;
+    String? themeStr;
     switch (theme) {
       case OverlayTheme.KALIUM:
         themeStr = "kalium";
